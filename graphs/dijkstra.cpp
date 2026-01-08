@@ -9,7 +9,7 @@ function<void(ll)> dijkstra = [&](ll source) {
         ll cur = pq.top().S;
         pq.pop();
 
-        if (cur_dist > dist[cur]) continue;
+        if (cur_dist != dist[cur]) continue;
 
         for (auto &e : adj[cur]) {
             ll next = e.F;

@@ -1,8 +1,8 @@
 class DSU {
 private:
-    vector<int> parent, rank;
+    vector<int> parent, sz;
 public:
-    DSU(int n) : parent(n), rank(n, 0) {
+    DSU(int n) : parent(n), sz(n, 1) {
         iota(parent.begin(), parent.end(), 0);
     }
 
@@ -15,13 +15,15 @@ public:
         y = find(y);
         if (x == y) return false;
 
-        if (rank[x] < rank[y]) swap(x, y);
+        if (sz[x] < sz[y]) swap(x, y);
         parent[y] = x;
-        if (rank[x] == rank[y]) rank[x]++;
+        sz[x] += sz[y];
         return true;
     }
 
     bool connected(int x, int y) {
         return find(x) == find(y);
     }
+
+    int size(int x) { return sz[find(x)]; }
 };
